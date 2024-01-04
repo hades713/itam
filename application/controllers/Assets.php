@@ -28,6 +28,12 @@ class Assets extends CI_Controller {
         $data['asset'] = $this->model_assets->get_asset($id);
         $this->load->view('asset_edit', $data);
     }
+
+    public function view($id) {
+        $this->load->model('model_assets');
+        $data['asset'] = $this->model_assets->get_asset($id);
+        $this->load->view('asset_view', $data);
+    }
     
     public function save_assets() {
         // Get asset details from the request

@@ -17,7 +17,12 @@
                 <a href="<?= base_url() ?>assets" class="btn btn-primary">Back</a>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col">
+                <h4>Google Drive</h4>
+                <iframe src="https://drive.google.com/embeddedfolderview?id=1LmLeB8ne5rHdELB5WFKRPSEqT9aDAijO#list" style="width:100%; height:600px; border:0;"></iframe>
+            </div>
+        </div>
         <form id="myForm" action="<?=base_url()?>assets/update_asset" method="POST">
             <input type="hidden" name="id" value="<?= $asset->id ?>">
             <div class="form-group">
@@ -92,8 +97,15 @@
 
             <div class="form-group">
                 <label for="remarks">Remarks:</label>
-                <textarea id="remarks" name="remarks" class="form-control"><?= $asset->remarks ?></textarea>
+                <textarea id="remarks" name="remarks" class="form-control" rows="20"><?= $asset->remarks ?></textarea>
             </div>
+
+            <div class="form-group">
+                <label for="google_folder_id">Google Drive Folder ID:</label>
+                <input type="text" id="google_folder_id" name="google_folder_id" class="form-control" value="<?= $asset->google_folder_id ?>">
+            </div>
+
+            <div class="form-group"><hr /></div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

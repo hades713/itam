@@ -6,18 +6,19 @@
     <title>Data Display</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 </head>
 <body data-bs-theme="dark" style="font-size:12px;">
-    <div id="app" class="container mt-5">
+    <div id="app" class="container mt-5 pl-5 pr-5">
         <div class="row">
             <div class="col">
                 <h1>IT Asset Management</h1>
                 <hr />
             </div>
         </div>
-        <button onclick="handleCreate()" class="btn btn-primary mb-3">Create</button>
+        <button onclick="handleCreate()" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Create</button>
         <div class="row">
             <div class="col border border-light rounded pt-3 pb-3">
                 <table id="dataTable" class="table table-dark table-striped">
@@ -28,7 +29,7 @@
                             <th>Production Server IP</th>
                             <th>Production System URL</th>
                             <th>Development Server IP</th>
-                            <th>Development System URL</th>
+                            <!-- <th>Development System URL</th> -->
                             <th>Edit</th> <!-- Added Edit column -->
                         </tr>
                         <tr>
@@ -37,7 +38,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th></th>
+                            <!-- <th></th> -->
                             <th></th>
                         </tr>
                     </thead>
@@ -67,10 +68,22 @@
                     { data: 'production_server_ip' }, // Production Server IP
                     { data: 'production_system_url' }, // Production System URL
                     { data: 'development_server_ip' }, // Development Server IP
-                    { data: 'development_system_url' }, // Development System URL
+                    //{ data: 'development_system_url' }, // Development System URL
                     { data: null, render: function(data, type, row) {
-                        return '<button onclick="handleEdit(' + row.id + ')" class="btn btn-secondary">Edit</button>';
+                        return ' \
+                            <button onclick="handleView(' + row.id + ')" class="btn btn-sm btn-secondary"><i class="fas fa-eye"></i></button> \
+                            <button onclick="handleEdit(' + row.id + ')" class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></button> \
+                        ';
                     }} // Edit column
+                ],
+                "columnDefs": [
+                    { 
+                    targets: 3,
+                    "data": "production_system_url",
+                    "render": function ( data, type, row, meta ) {
+                        return '<a target="_blank" href="'+data+'">'+data+'</a>';
+                    }
+                    },
                 ],
                 order: [[ 0, "asc" ]] // Initial sort column and order
             }).search(""); // Initialize search functionality
@@ -82,7 +95,7 @@
                 'production_server_ip',
                 'production_system_url',
                 'development_server_ip',
-                'development_system_url',
+                //'development_system_url',
             ]
             $('#dataTable thead tr:eq(1) th').each( function (i) {
                 if (i < dbtablecols.length) {
@@ -124,6 +137,10 @@
 
         function handleEdit(id) {
             window.location.href = "./assets/edit/" + id;
+        }
+
+        function handleView(id) {
+            window.location.href = "./assets/view/" + id;
         }
     </script>
 </body>
