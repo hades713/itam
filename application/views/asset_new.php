@@ -93,7 +93,7 @@
 
             <div class="form-group">
                 <label for="remarks">Remarks:</label>
-                <textarea id="remarks" name="remarks" class="form-control"></textarea>
+                <textarea id="remarks" name="remarks" class="form-control" rows="20"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

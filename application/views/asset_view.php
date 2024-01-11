@@ -8,7 +8,7 @@
 </head>
 
 <body data-bs-theme="dark">
-    <div id="app" class="container">
+    <div id="app" class="container-fluid">
         <div class="row">
             <div class="col">
                 <h1>View Asset</h1>
@@ -18,9 +18,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <!-- <div class="col-4">
                 <iframe src="https://drive.google.com/embeddedfolderview?id=1LmLeB8ne5rHdELB5WFKRPSEqT9aDAijO#list" style="width:100%; height:600px; border:0;"></iframe>
-            </div>
+            </div> -->
             <div class="col">
                 <form id="myForm" action="<?=base_url()?>assets/update_asset" method="POST">
                     <input type="hidden" name="id" value="<?= $asset->id ?>">
@@ -65,7 +65,7 @@
 
                             <div class="form-group">
                                 <label for="production_system_url">Production System URL:</label>
-                                <?= $asset->production_system_url ?>
+                                <a href="<?= $asset->production_system_url ?>" target="_blank"><?= $asset->production_system_url ?></a>
                             </div>
 
                             <div class="form-group">
@@ -82,7 +82,7 @@
 
                             <div class="form-group">
                                 <label for="development_system_url">Development System URL:</label>
-                                <?= $asset->development_system_url ?>
+                                <a href="<?= $asset->development_system_url ?>" target="_blank"><?= $asset->development_system_url ?></a>
                             </div>
 
                             <div class="form-group">
