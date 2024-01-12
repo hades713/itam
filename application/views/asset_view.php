@@ -54,6 +54,11 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="project_document">Project Document:</label>
+                        <a href="<?= $asset->project_document ?>" target="_blank"><?= $asset->project_document ?></a>
+                    </div>
+
                     <div class="form-group"><hr /></div>
 
                     <div class="row">

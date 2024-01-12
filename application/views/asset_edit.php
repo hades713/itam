@@ -49,6 +49,11 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="project_document">Project Document:</label>
+                <input type="text" id="project_document" name="project_document" required class="form-control" value="<?= $asset->project_document ?>">
+            </div>
+
             <div class="form-group"><hr /></div>
 
             <div class="row">
