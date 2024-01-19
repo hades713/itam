@@ -18,7 +18,7 @@
             </div>
         </div>
         <form id="myForm" action="<?=base_url()?>assets/update_asset" method="POST">
-            <input type="hidden" name="id" value="<?= $asset->id ?>">
+            <input type="hidden" id="id" name="id" value="<?= $asset->id ?>">
             <div class="form-group">
                 <label for="system_name">System Name:</label>
                 <input type="text" id="system_name" name="system_name" required class="form-control" value="<?= $asset->system_name ?>">
@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <label for="project_document">Project Document:</label>
-                <input type="text" id="project_document" name="project_document" required class="form-control" value="<?= $asset->project_document ?>">
+                <input type="text" id="project_document" name="project_document" class="form-control" value="<?= $asset->project_document ?>">
             </div>
 
             <div class="form-group"><hr /></div>
@@ -93,23 +93,123 @@
             </div>
 
             <div class="form-group"><hr /></div>
-
-            <div class="form-group">
-                <label for="remarks">Remarks:</label>
-                <textarea id="remarks" name="remarks" class="form-control" rows="20"><?= $asset->remarks ?></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="google_folder_id">Google Drive Folder ID:</label>
-                <input type="text" id="google_folder_id" name="google_folder_id" class="form-control" value="<?= $asset->google_folder_id ?>">
+            
+            <div class="form-group" id="footprint">
+                <h4>Footprint</h4>
+                <div class="row">
+                    <div class="col">Action Content</div>
+                    <div class="col">Action Date</div>
+                    <div class="col">Issuer</div>
+                    <div class="col">Assigned To</div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" name="action_content" class="form-control">
+                    </div>
+                    <div class="col">
+                        <input type="date" name="action_date" class="form-control">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="issuer" class="form-control">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="assigned_to" class="form-control">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" id="add_footprint">Create</button>
+                    </div>
+                </div>
+                <div id="existing_footprints">
+                    <!-- Existing footprints will be loaded here -->
+                </div>
             </div>
 
             <div class="form-group"><hr /></div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+                <label for="remarks">Remarks:</label>
+                <textarea id="remarks" name="remarks" class="form-control" rows="10"><?= $asset->remarks ?></textarea>
+            </div>
+
+            <style>
+                .sticky-button {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    padding: 10px;
+                    background-color: rgba(100,100,100,0.5);
+                    text-align: center;
+                }
+                #app {
+                    padding-bottom: 100px;
+                }
+                #footprint .row {
+                    padding-bottom: 10px;
+                }
+                #existing_footprints {
+                    font-size:14px;
+                }
+            </style>
+
+            <div class="sticky-button">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#add_footprint').click(function() {
+            var action_content = $('#action_content').val();
+            var action_date = $('#action_date').val();
+            var issuer = $('#issuer').val();
+            var assigned_to = $('#assigned_to').val();
+
+            $.ajax({
+                url: '<?=base_url()?>assets/save_footprints'+$('#id').val(), // replace with the path to your PHP script
+                method: 'POST',
+                data: {
+                    action_content: action_content,
+                    action_date: action_date,
+                    issuer: issuer,
+                    assigned_to: assigned_to
+                },
+                success: function(response) {
+                    // Refresh the "Existing Footprints" div
+                    $('#existing_footprints').html(response);
+                }
+            });
+        });
+
+        $('.delete-footprint').click(function() {
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: '<?=base_url()?>assets/delete_footprints'+$('#id').val(), // replace with the path to your PHP script
+                method: 'POST',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    // Refresh the "Existing Footprints" div
+                    $('#existing_footprints').html(response);
+                }
+            });
+        });
+
+        // Load existing footprints
+        $.ajax({
+            url: '<?=base_url()?>assets/get_footprints/'+$('#id').val(), // replace with the path to your PHP script
+            method: 'GET',
+            success: function(response) {
+                // Refresh the "Existing Footprints" div
+                $('#existing_footprints').html(response);
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

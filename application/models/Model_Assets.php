@@ -18,6 +18,11 @@ class Model_assets extends CI_Model {
         $this->db->update('assets', $data);
     }
     
+    public function update_footprint($id, $data) {
+        $this->db->where('id', $id);
+        $this->db->update('footprint', $data);
+    }
+
     public function get_asset($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('assets');
@@ -33,6 +38,13 @@ class Model_assets extends CI_Model {
         $this->db->select($column);
         $this->db->order_by($column);
         $query = $this->db->get('assets');
+        return $query->result();
+    }
+
+    public function get_footprints($id) {
+        $this->db->where('asset_id', $id);
+        $this->db->order_by('action_date', 'DESC');
+        $query = $this->db->get('footprint');
         return $query->result();
     }
 }

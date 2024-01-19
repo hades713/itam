@@ -53,7 +53,7 @@
 
             <div class="form-group">
                 <label for="project_document">Project Document:</label>
-                <input type="text" id="project_document" name="project_document" required class="form-control">
+                <input type="text" id="project_document" name="project_document" class="form-control">
             </div>
 
             <div class="form-group"><hr /></div>
@@ -95,7 +95,7 @@
             </div>
 
             <div class="form-group"><hr /></div>
-
+        
             <div class="form-group">
                 <label for="remarks">Remarks:</label>
                 <textarea id="remarks" name="remarks" class="form-control" rows="20"></textarea>

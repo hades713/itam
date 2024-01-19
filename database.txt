@@ -1,0 +1,27 @@
+CREATE TABLE `assets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `system_name` varchar(255) NOT NULL,
+  `system_desc` text NOT NULL,
+  `related_teams` varchar(255) NOT NULL,
+  `production_server_ip` varchar(255) DEFAULT NULL,
+  `production_system_url` varchar(255) DEFAULT NULL,
+  `production_document_path` varchar(255) DEFAULT NULL,
+  `development_server_ip` varchar(255) DEFAULT NULL,
+  `development_system_url` varchar(255) DEFAULT NULL,
+  `development_document_path` varchar(255) DEFAULT NULL,
+  `vendor` varchar(255) DEFAULT NULL,
+  `annual_maintenance_cost` float(15,2) DEFAULT NULL,
+  `remarks` longtext DEFAULT NULL,
+  `project_document` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `footprint` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_id` int(11) NOT NULL,
+  `action_content` varchar(255) DEFAULT NULL,
+  `action_date` date DEFAULT NULL,
+  `issuer` varchar(255) DEFAULT NULL,
+  `assigned_to` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
